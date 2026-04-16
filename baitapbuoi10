@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Danh sách SV</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+<h2>Đọc file Excel</h2>
+<input type="file" id="fileInput">
+
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>MSV</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Khóa</th>
+            <th>Khoa</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+class Student {
+    constructor(stt, msv, name) {
+        this.stt = stt;
+        this.msv = msv;
+        this.name = name;
+        this.email = this.createEmail();
+        this.course = this.getCourse();
+        this.faculty = this.getFaculty();
+    }
+
+    // Bỏ dấu tiếng Việt
+    removeVN(str) {
+        return str.normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .toLowerCase();
+    }
+
+    // Tạo email
+    createEmail() {
+        let parts = this.removeVN(this.name).trim().split(/\s+/);
+        let last = parts.pop(); // tên
+        let initials = parts.map(p => p[0]).join(""); // chữ cái đầu
+        return ${last}${initials}.${this.msv.toLowerCase()}@hvnh.edu.vn;
+    }
+
+    // Lấy khóa học (2 số đầu)
+    getCourse() {
+        let prefix = this.msv.substring(0, 2);
+        return "Khóa " + prefix;
+    }
+
+    // Lấy khoa (3 số giữa: vị trí 3-5)
+    getFaculty() {
+        let code = this.msv.substring(3, 6);
+
+        switch(code) {
+            case "404": return "Khoa Công nghệ thông tin & Kinh tế số";
+            case "401": return "Khoa Tài chính";
+            default: return "Không xác định";
+        }
+    }
+}
+
+document.getElementById("fileInput").onchange = function(e) {
+    let file = e.target.files[0];
+    if (!file) return;
+
+    let reader = new FileReader();
+
+    reader.onload = function(evt) {
+        let data = new Uint8Array(evt.target.result);
+        let wb = XLSX.read(data, {type: "array"});
+        let sheet = wb.Sheets[wb.SheetNames[0]];
+        let rows = XLSX.utils.sheet_to_json(sheet, {header: 1});
+
+        let result = [];
+
+        for (let i = 1; i < rows.length; i++) {
+            let [stt, msv, name] = rows[i];
+
+            if (msv && name) {
+                result.push(new Student(stt, msv, name));
+            }
+        }
+
+        showTable(result);
+    };
+
+    reader.readAsArrayBuffer(file);
+};
+
+function showTable(list) {
+    let html = "";
+
+    list.forEach(s => {
+        html += `
+            <tr>
+                <td>${s.stt}</td>
+                <td>${s.msv}</td>
+                <td>${s.name}</td>
+                <td>${s.email}</td>
+                <td>${s.course}</td>
+                <td>${s.faculty}</td>
+            </tr>
+        `;
+    });
+
+    document.getElementById("tableBody").innerHTML = html;
+}
+</script>
+
+</body>
+</html>
