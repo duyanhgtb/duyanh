@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUXURY | Thế Giới Mỹ Phẩm Cao Cấp</title>
+  <!-- Material Icons, FontAwesome -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="#" class="logo">LUXURY.</a>
+    <ul class="nav-links">
+      <li><a href="#home">Trang chủ</a></li>
+      <li><a href="#about">Giới thiệu</a></li>
+      <li><a href="#products">Sản phẩm</a></li>
+      <li><a href="#contact">Liên hệ</a></li>
+    </ul>
+    <div class="nav-icons">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Tìm tên sản phẩm...">
+        <span class="material-icons" id="search-icon">search</span>
+      </div>
+      <span class="material-icons" id="auth-icon" title="Đăng Nhập">person_outline</span>
+      <span class="material-icons" id="cart-icon" style="position:relative;" title="Giỏ Hàng">
+        shopping_bag
+        <div class="cart-count" id="cart-badge">0</div>
+      </span>
+    </div>
+  </nav>
+
+  <!-- Auth Modal -->
+  <div class="auth-modal" id="auth-modal">
+    <div class="auth-content">
+      <span class="close-auth" id="close-auth">&times;</span>
+      <h2>Đăng Nhập</h2>
+      <input type="text" class="auth-input" placeholder="Email hoặc số điện thoại" required>
+      <input type="password" class="auth-input" placeholder="Mật khẩu" required>
+      <button class="btn checkout-btn" style="width:100%; border-radius:8px" onclick="alert('Đăng nhập thành công!'); document.getElementById('auth-modal').classList.remove('open');">Đăng Nhập</button>
+      <p style="text-align:center; margin-top:1rem; font-size:0.9rem; color: #555;">Chưa có tài khoản? <a href="#" style="color:var(--primary); font-weight:bold; text-decoration:none;">Đăng ký ngay</a></p>
+    </div>
+  </div>
+
+  <!-- Side Cart Drawer -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Giỏ hàng của bạn</h3>
+      <span class="material-icons close-cart" id="close-cart">close</span>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty">Giỏ hàng đang trống. Hãy mua sắm nhé!</div>
+      <!-- Cart items injected here by JS -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Tổng cộng:</span>
+        <span id="cart-total-price">0 ₫</span>
+      </div>
+      <button class="checkout-btn">Thanh Toán Ngay</button>
+    </div>
+  </div>
+
+  <!-- Hero Section with JS Slider -->
+  <section class="hero" id="home">
+    <div class="slider-container">
+      <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1>Chăm sóc sắc đẹp của bạn</h1>
+      <p style="font-size: 1.5rem; font-weight: 600; color: #e63946; margin-bottom: 2rem; letter-spacing: 2px;">ƯU ĐÃI ĐẾN 50% TUẦN NÀY</p>
+      <a href="#products" class="btn">Mua Sắm Ngay</a>
+    </div>
+  </section>
+
+  <!-- Detailed Brand Story Section -->
+  <section class="story-section" id="about">
+    <div class="story-img-wrapper">
+      <img src="images/brand_story_img_1776407208755.png" alt="Câu chuyện thương hiệu LUXURY">
+    </div>
+    <div class="story-content">
+      <h2>Giá trị thuần khiết, Sắc đẹp kiêu sa</h2>
+      <p>Ra đời từ khao khát mang đến vẻ đẹp vĩnh cửu, <strong>LUXURY</strong> là nơi hội tụ tinh hoa của công nghệ mỹ phẩm từ những phòng nghiên cứu uy tín nhất thế giới, đúc kết cùng những thành phần chiết xuất quý giá từ thiên nhiên thuần khiết.</p>
+      <p>Mỗi giọt tinh chất, mỗi màu son đều ẩn chứa câu chuyện về sự tỉ mỉ, trân trọng và khao khát yêu thương làn da. Chúng tôi không chỉ cung cấp mỹ phẩm, chúng tôi mang đến cho bạn sự tự tin, khí chất thanh tao và một "phép màu" hoàn mỹ để đánh thức phiên bản lộng lẫy nhất của rực rỡ bên trong bạn.</p>
+      <a href="#products" class="btn">Khám phá tuyệt tác</a>
+    </div>
+  </section>
+
+  <!-- Expanded Products Section with Filter -->
+  <section class="products" id="products">
+    <h2 class="section-title">Danh Sách Sản Phẩm</h2>
+    <p class="section-subtitle">Lựa chọn hàng đầu của các tín đồ làm đẹp</p>
+    
+    <!-- Filter HTML -->
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="skincare">Chăm sóc da</button>
+      <button class="filter-btn" data-filter="makeup">Trang điểm</button>
+      <button class="filter-btn" data-filter="fragrance">Nước hoa</button>
+    </div>
+
+    <div class="product-grid" id="product-list">
+      
+      <!-- Skincare 1 -->
+      <div class="product-card" data-category="skincare" data-id="1">
+        <div class="product-img-wrapper">
+          <img src="images/luxury_serum_1776404500065.png" alt="Dior Capture Totale Serum" onerror="this.src='https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600'">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Dior Capture Totale Serum</h3>
+        <p class="product-price">3.500.000</p>
+      </div>
+
+      <!-- Skincare 2 -->
+      <div class="product-card" data-category="skincare" data-id="2">
+        <div class="product-img-wrapper">
+          <img src="images/skincare_cream_1776407395965.png" alt="La Mer Face Cream">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Kem Dưỡng La Mer Crème De La Mer</h3>
+        <p class="product-price">8.500.000</p>
+      </div>
+
+      <!-- Skincare 3 -->
+      <div class="product-card" data-category="skincare" data-id="3">
+        <div class="product-img-wrapper">
+          <img src="images/skincare_essence_1776407411838.png" alt="SK-II Essence">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Nước Thần SK-II Facial Treatment Essence</h3>
+        <p class="product-price">4.200.000</p>
+      </div>
+
+      <!-- Skincare 4 -->
+      <div class="product-card" data-category="skincare" data-id="4">
+        <div class="product-img-wrapper">
+          <img src="images/skincare_cleanser_1776407677565.png" alt="Estee Lauder Night Repair">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Estée Lauder Advanced Night Repair</h3>
+        <p class="product-price">3.200.000</p>
+      </div>
+
+
+      <!-- Makeup 1 -->
+      <div class="product-card" data-category="makeup" data-id="5">
+        <div class="product-img-wrapper">
+          <img src="images/lipstick_mockup_1776404467315.png" alt="Dior Rouge Lipstick" onerror="this.src='https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600'">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Son Dior Rouge Velvet 999</h3>
+        <p class="product-price">1.150.000</p>
+      </div>
+
+      <!-- Makeup 2 -->
+      <div class="product-card" data-category="makeup" data-id="6">
+        <div class="product-img-wrapper">
+          <img src="images/eyeshadow_palette_1776404482564.png" alt="Dior Backstage Eye Palette" onerror="this.src='https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600'">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Dior Backstage Eye Palette</h3>
+        <p class="product-price">1.600.000</p>
+      </div>
+
+      <!-- Makeup 3 -->
+      <div class="product-card" data-category="makeup" data-id="7">
+        <div class="product-img-wrapper">
+          <img src="images/makeup_foundation_1776407427843.png" alt="MAC Studio Fix Fluid">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Kem Nền MAC Studio Fix Fluid</h3>
+        <p class="product-price">1.050.000</p>
+      </div>
+
+      <!-- Makeup 4 -->
+      <div class="product-card" data-category="makeup" data-id="8">
+        <div class="product-img-wrapper">
+          <img src="images/makeup_cushion_1776407690842.png" alt="Chanel Cushion">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Phấn Nước Chanel Les Beiges</h3>
+        <p class="product-price">1.850.000</p>
+      </div>
+
+
+      <!-- Fragrance 1 -->
+      <div class="product-card" data-category="fragrance" data-id="9">
+        <div class="product-img-wrapper">
+          <img src="images/perfume_bottle_1776407471451.png" alt="Chanel Coco Mademoiselle">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Chanel Coco Mademoiselle 50ml</h3>
+        <p class="product-price">3.200.000</p>
+      </div>
+
+      <!-- Fragrance 2 -->
+      <div class="product-card" data-category="fragrance" data-id="10">
+        <div class="product-img-wrapper">
+          <img src="images/perfume_pink_1776407722598.png" alt="Dior Miss Dior">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Dior Miss Dior Eau de Parfum 50ml</h3>
+        <p class="product-price">3.400.000</p>
+      </div>
+
+      <!-- Fragrance 3 -->
+      <div class="product-card" data-category="fragrance" data-id="11">
+        <div class="product-img-wrapper">
+          <img src="images/perfume_blue_1776407706582.png" alt="YSL Libre">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Yves Saint Laurent Libre Intense 50ml</h3>
+        <p class="product-price">3.650.000</p>
+      </div>
+
+      <!-- Fragrance 4 -->
+      <div class="product-card" data-category="fragrance" data-id="12">
+        <div class="product-img-wrapper">
+          <img src="images/perfume_black_1776407736858.png" alt="MFK Baccarat Rouge 540">
+          <button class="add-to-cart">Mua ngay</button>
+        </div>
+        <h3 class="product-title">Maison Francis Kurkdjian Baccarat 540</h3>
+        <p class="product-price">7.500.000</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-col">
+      <h4>LUXURY SHOP.</h4>
+      <p>Cửa hàng mỹ phẩm chính hãng hàng đầu. Chăm sóc sắc đẹp của bạn là sứ mệnh của chúng tôi! Tự tin tỏa sáng với nhan sắc rạng ngời.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Thông Tin Liên Hệ</h4>
+      <p><i class="fas fa-map-marker-alt"></i> 123 Đường Ngọc Trai, Quận 1, TP. HCM</p>
+      <p><i class="fas fa-phone-alt"></i> Hotline: 0909.123.456</p>
+      <p><i class="fas fa-envelope"></i> Email: cskh@luxuryshop.vn</p>
+    </div>
+    <div class="footer-col" style="padding-top: 15px;">
+      <h4>Mạng Xã Hội</h4>
+      <div class="social-links" style="display: flex; gap: 1rem; font-size: 1.5rem;">
+        <a href="#" style="color: #fff;"><i class="fab fa-facebook"></i></a>
+        <a href="#" style="color: #fff;"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="color: #fff;"><i class="fab fa-youtube"></i></a>
+        <a href="#" style="color: #fff;"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Thế Giới Mỹ Phẩm LUXURY. Vẻ đẹp vượt thời gian.
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
